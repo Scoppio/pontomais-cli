@@ -22,6 +22,7 @@ setup(
     url='https://github.com/Scoppio/pontomais-cli',
     packages=find_packages(),
     include_package_data=True,
+    license="MIT",
     zip_safe=True,
     install_requires=requirements,
     entry_points='''
