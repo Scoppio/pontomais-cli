@@ -70,3 +70,15 @@ Options:
   --password TEXT
   --help                   Show this message and exit.
 ```
+
+## Exemplo de arquivo PROFILE.json
+
+```json
+{
+    "login": "CPF SÓ OS DIGITOS",
+    "latitude": -17.0,
+    "longitude": -42.0,
+    "address": "Rua Sete de Março, 1009 - Ipiranga, Juazeiro do Norte - SP, 99999-999, Brasil"
+}
+
+```
