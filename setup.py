@@ -19,7 +19,7 @@ setup(
     keywords='cli pontomais',
     author="Lucas S. Coppio",
     author_email='lucas@strider.ag',
-    url='https://github.com/striderag/pontomais-cli',
+    url='https://github.com/Scoppio/pontomais-cli',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=True,
