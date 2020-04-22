@@ -1,10 +1,9 @@
-# ttl.py - Calculates when to finish your workday based on data from Pontomais
-# Setup: insert auth in function request() with the instructions there and run.
-import requests
-from pontomais import API_ROOT, CREDENTIAL_FILE
+import json
 from datetime import datetime
 
-import json
+import requests
+
+from pontomais import API_ROOT, CREDENTIAL_FILE
 
 LUNCH_TIME = 1  # Hours
 

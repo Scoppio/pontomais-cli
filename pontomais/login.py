@@ -1,5 +1,7 @@
-import requests
 import json
+
+import requests
+
 from pontomais import API_ROOT, CREDENTIAL_FILE, PROFILE_FILE
 
 

@@ -1,8 +1,11 @@
-import click
 import json
-from pontomais.login import login as p_login
+
+import click
+
 from pontomais.calc_time import main as p_calculate
 from pontomais.clockin import main as p_register
+from pontomais.login import login as p_login
+
 
 @click.group()
 def cli():

@@ -1,8 +1,10 @@
 # ttl.py - Calculates when to finish your workday based on data from Pontomais
 # Setup: insert auth in function request() with the instructions there and run.
-import requests
-from uuid import uuid4
 import json
+from uuid import uuid4
+
+import requests
+
 from pontomais import API_ROOT, CREDENTIAL_FILE, PROFILE_FILE
 
 
