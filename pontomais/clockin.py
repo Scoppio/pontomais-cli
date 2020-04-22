@@ -3,15 +3,14 @@
 import requests
 from uuid import uuid4
 import json
-
-API_ROOT = 'https://api.pontomais.com.br/api'
+from pontomais import API_ROOT, CREDENTIAL_FILE, PROFILE_FILE
 
 
 def main():
-    with open("../credentials.json", "r") as f:
+    with open(CREDENTIAL_FILE, "r") as f:
         credential = json.load(f)
 
-    with open("../profile.json", "r") as f:
+    with open(PROFILE_FILE, "r") as f:
         profile = json.load(f)
     address = create_my_address_info(profile)
     request(address, credential)

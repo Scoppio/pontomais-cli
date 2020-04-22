@@ -1,4 +1,7 @@
 
+.creds
+.profile
+
 *.js
 *.sh
 *.json

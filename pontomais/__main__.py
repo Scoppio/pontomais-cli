@@ -1,7 +1,8 @@
 import click
 import json
 from pontomais.login import login as p_login
-
+from pontomais.calc_time import main as p_calculate
+from pontomais.clockin import main as p_register
 
 @click.group()
 def cli():
@@ -17,6 +18,8 @@ def cli():
 @click.password_option(confirmation_prompt=False)
 def get_credentials(login, address, latitude, longitude, json_profile, password):
     """
+    Generate a credential file necessary to do almost any action with this client
+
     if using a json profile to provide the profile, you do not require to add the password on it, the
     password will be asked to be input in a safe manner in this app
 
@@ -35,17 +38,24 @@ def get_credentials(login, address, latitude, longitude, json_profile, password)
             raise RuntimeError("Missing arguments, must provide login, latitude, longitude, address and password")
         profile = {"login": login, "latitude": latitude, "longitude": longitude, "address": address}
     profile["password"] = password
+
     p_login(profile)
 
 
 @cli.command()
 def calctime():
-    click.echo('Calcular tempo')
+    """
+    Calculates at which time you need to clock out of work
+    """
+    p_calculate()
 
 
 @cli.command()
 def register():
-    click.echo("Ponto registrado")
+    """
+    Clocks in and out of the job
+    """
+    p_register()
 
 
 if __name__ == "__main__":

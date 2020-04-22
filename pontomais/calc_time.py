@@ -1,40 +1,47 @@
 # ttl.py - Calculates when to finish your workday based on data from Pontomais
 # Setup: insert auth in function request() with the instructions there and run.
 import requests
-from pprint import pprint
+from pontomais import API_ROOT, CREDENTIAL_FILE
 from datetime import datetime
 
 import json
 
 LUNCH_TIME = 1  # Hours
-API_ROOT = 'https://api.pontomais.com.br/api'
 
-with open("../credentials.json", "r") as f:
-    credential = json.load(f)
+credential = None
+
 
 def main():
+    calculate()
+
+
+def calculate():
+    global credential
+    with open(CREDENTIAL_FILE, "r") as f:
+        credential = json.load(f)
+
     cards = request(today())['work_day']['time_cards']
     if not cards:
         print("No timecards today.")
-        exit(1)
+        return
 
     if len(cards) == 3:
-        calculate_3_cards(cards)
+        _calculate_3_cards(cards)
     elif len(cards) in (1, 2):
-        calculate_fallback(cards)
+        _calculate_fallback(cards)
     else:
         print("Unsupported number of timecards: {}".format(len(cards)))
-        exit(1)
+        return
 
 
-def calculate_fallback(cards):
+def _calculate_fallback(cards):
     t0 = convert(cards[0])
     ttl = lambda total: mins_to_str(t0 + 60*total + 60*LUNCH_TIME)
     print(" 8h shift -> {}".format(ttl(8)))
     print("10h shift -> {}".format(ttl(10)))
 
 
-def calculate_3_cards(cards):
+def _calculate_3_cards(cards):
     t1, t2, t3 = [convert(c) for c in cards]
     now = now_mins()
 
@@ -83,5 +90,8 @@ def request(day):
     url = "{}/time_card_control/current/work_days/{}".format(API_ROOT, day)
     return requests.get(url, headers=headers).json()
 
+
 if __name__ == "__main__":
+    with open(CREDENTIAL_FILE, "r") as f:
+        credential = json.load(f)
     main()
