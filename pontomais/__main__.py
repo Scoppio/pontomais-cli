@@ -41,15 +41,15 @@ def get_credentials(login, address, latitude, longitude, json_profile, password)
     p_login(profile)
 
 
-@cli.command()
+@cli.command("ttco")
 def calctime():
     """
-    Calculates at which time you need to clock out of work
+    Time to clock out - Calculates at which time you need to clock out of work
     """
     p_calculate()
 
 
-@cli.command()
+@cli.command("clk")
 def register():
     """
     Clocks in and out of the job

@@ -29,9 +29,10 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  calctime  Calculates at which time you need to clock out of work
-  login     Generate a credential file necessary to do almost any action...
-  register  Clocks in and out of the job
+  clk    Clocks in and out of the job
+  login  Generate a credential file necessary to do almost any action with...
+  ttco   Time to clock out - Calculates at which time you need to clock out...
+
 ```
 
 Pra fazer o login basta:
