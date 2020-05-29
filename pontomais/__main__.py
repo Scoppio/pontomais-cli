@@ -3,6 +3,7 @@ import json
 import click
 
 from pontomais.calc_time import main as p_calculate
+from pontomais.calc_time import time_cards as p_time_cards
 from pontomais.clockin import main as p_register
 from pontomais.login import login as p_login
 
@@ -47,6 +48,19 @@ def calctime():
     Time to clock out - Calculates at which time you need to clock out of work
     """
     p_calculate()
+
+
+@cli.command("cards")
+def time_cards():
+    """
+    Time cards you clocked today
+    """
+    cards = p_time_cards()
+    for n, card in enumerate(cards):
+        print("Time Card:", n)
+        print(card["date"], card["time"])
+        print(card["source"]["name"])
+        print("---")
 
 
 @cli.command("clk")

@@ -15,14 +15,7 @@ def main():
 
 
 def calculate():
-    global credential
-    with open(CREDENTIAL_FILE, "r") as f:
-        credential = json.load(f)
-
-    cards = request(today())['work_day']['time_cards']
-    if not cards:
-        print("No timecards today.")
-        return
+    cards = time_cards()
 
     if len(cards) == 3:
         _calculate_3_cards(cards)
@@ -31,6 +24,18 @@ def calculate():
     else:
         print("Unsupported number of timecards: {}".format(len(cards)))
         return
+
+
+def time_cards():
+    global credential
+    with open(CREDENTIAL_FILE, "r") as f:
+        credential = json.load(f)
+
+    cards = request(today())['work_day']['time_cards']
+    if not cards:
+        print("No timecards today.")
+        return
+    return cards
 
 
 def _calculate_fallback(cards):
