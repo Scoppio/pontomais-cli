@@ -1,6 +1,7 @@
 # ttl.py - Calculates when to finish your workday based on data from Pontomais
 # Setup: insert auth in function request() with the instructions there and run.
 import json
+from datetime import datetime
 from uuid import uuid4
 
 import requests
@@ -68,7 +69,7 @@ def request(address, credential):
 
     url = "{}/time_cards/register".format(API_ROOT)
     r = requests.post(url, headers=headers, json=address)
-    print(r.status_code)
+    print(datetime.now(), "- Status code:", r.status_code)
 
 
 

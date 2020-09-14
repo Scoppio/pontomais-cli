@@ -93,7 +93,8 @@ def request(day):
 
     url = "{}/time_card_control/current/work_days/{}".format(API_ROOT, day)
     r = requests.get(url, headers=headers)
-    if r.status_code >= 200 and r.status_code < 300:
+
+    if 200 <= r.status_code < 300:
         return r.json()
     else:
         print(r.status_code, r.text)
