@@ -56,6 +56,9 @@ def time_cards():
     Time cards you clocked today
     """
     cards = p_time_cards()
+
+    if cards is None:
+        return
     for n, card in enumerate(cards):
         print("Time Card:", n)
         print(card["date"], card["time"])

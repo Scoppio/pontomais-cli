@@ -16,7 +16,9 @@ def main():
 
 def calculate():
     cards = time_cards()
-
+    
+    if cards is None:
+        return
     if len(cards) == 3:
         _calculate_3_cards(cards)
     elif len(cards) in (1, 2):
