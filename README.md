@@ -11,6 +11,11 @@ rode o seguinte comando dentro da pasta do programa
 pip3 install . 
 ```
 
+Caso o comando `ptm` não seja encontrado no seu terminal verifique se o local de instalação do pacote se encontra na variável de ambiente PATH. Executar a saída do comando abaixo pode resolver o problema para a sessão atual e adicionar este comando no arquivo `~/.bashrc` ou `~/.zshrc` pode resolver o problema permanentemente.
+
+```shell script
+echo "export PATH=$(pip3 show pontomais-cli | grep Location | cut -d' '  -f2 | sed 's/lib.*//')bin:\$PATH"
+```
 ## Como usar
 
 Uma vez instalado, basta usar é muito simples, no terminal rode o commando:
