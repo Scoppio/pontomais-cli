@@ -23,7 +23,7 @@ def calculate():
         _calculate_3_cards(cards)
     elif len(cards) in (1, 2):
         _calculate_fallback(cards)
-    elif len(cards)%2==0:
+    elif len(cards)%2 == 0:
         _calculate_even_cards(cards)
     else:
         _calculate_odd_cards(cards)
@@ -44,7 +44,7 @@ def time_cards():
 # Automatically includes launch time
 def _calculate_fallback(cards):
     t0 = convert(cards[0])
-    ttl = lambda total: mins_to_str(t0 + max(60*total + 60*LUNCH_TIME,0))
+    ttl = lambda total: mins_to_str(t0 + max(60*total + 60*LUNCH_TIME, 0))
     print(" 8h shift -> Clock out at {}".format(ttl(8)))
     print("10h shift -> Clock out at {}".format(ttl(10)))
 
@@ -58,7 +58,7 @@ def _calculate_3_cards(cards):
     p2 = now - t3
 
     # Show
-    ttl = lambda total: mins_to_str(now + max(total*60 - p1 - p2,0))
+    ttl = lambda total: mins_to_str(now + max(total*60 - p1 - p2, 0))
     print(" 8h shift -> Clock out at {}".format(ttl(8)))
     print("10h shift -> Clock out at {}".format(ttl(10)))
 
@@ -70,7 +70,7 @@ def _calculate_minutes_for_multiple_cards(cards_in_mins):
     # Calculate
     sum_of_worked_mins=0
     for i in range(0,len(cards_in_mins),2):
-        sum_of_worked_mins += cards_in_mins[i+1]-cards_in_mins[i]
+        sum_of_worked_mins += cards_in_mins[i+1] - cards_in_mins[i]
     return sum_of_worked_mins
     
 
@@ -80,7 +80,7 @@ def _calculate_odd_cards(cards):
     now = now_mins()
 
     # Show
-    ttl = lambda total: mins_to_str(now + max(total*60 - sum_of_worked_mins,0))
+    ttl = lambda total: mins_to_str(now + max(total*60 - sum_of_worked_mins, 0))
     print(" 8h shift -> Clock out at {}".format(ttl(8)))
     print("10h shift -> Clock out at {}".format(ttl(10)))
 
@@ -90,7 +90,7 @@ def _calculate_even_cards(cards):
     sum_of_worked_mins=_calculate_minutes_for_multiple_cards(cards_in_mins)
     
     # Show
-    mwt = lambda total: mins_to_str(max(total*60 - sum_of_worked_mins,0))
+    mwt = lambda total: mins_to_str(max(total*60 - sum_of_worked_mins, 0))
     print(" 8h shift -> Missing {} of work".format(mwt(8)))
     print("10h shift -> Missing {} of work".format(mwt(10)))
 
