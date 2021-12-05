@@ -94,6 +94,7 @@ def _calculate_even_cards(cards):
     print(" 8h shift -> Missing {} of work".format(mwt(8)))
     print("10h shift -> Missing {} of work".format(mwt(10)))
 
+
 def convert(card):
     return str_to_mins(card['time'])
 

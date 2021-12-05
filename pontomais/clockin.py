@@ -54,6 +54,7 @@ def get_common_headers():
         'origin': 'https://app.pontomaisweb.com.br',
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36'
     }
+    
 
 def request(address, credential):
     # Take from the api/time_card_control/current/work_days/ request
