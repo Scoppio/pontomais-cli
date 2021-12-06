@@ -3,7 +3,7 @@
 import json
 from datetime import datetime
 from uuid import uuid4
-
+from http.client import responses
 import requests
 
 from pontomais import API_ROOT, CREDENTIAL_FILE, PROFILE_FILE
@@ -54,6 +54,7 @@ def get_common_headers():
         'origin': 'https://app.pontomaisweb.com.br',
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36'
     }
+    
 
 def request(address, credential):
     # Take from the api/time_card_control/current/work_days/ request
@@ -69,7 +70,9 @@ def request(address, credential):
 
     url = "{}/time_cards/register".format(API_ROOT)
     r = requests.post(url, headers=headers, json=address)
-    print(datetime.now(), "- Status code:", r.status_code)
+    status = r.status_code
+    status = f'{responses[status]} ({status})'
+    print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - Status code: {status}')
 
 
 
