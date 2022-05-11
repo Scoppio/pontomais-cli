@@ -6,8 +6,19 @@ from pontomais import API_ROOT, CREDENTIAL_FILE, PROFILE_FILE
 
 
 def login(credentials):
-    r = requests.post(API_ROOT+"/auth/sign_in", json=credentials).json()
+    
+    req = requests.post(API_ROOT+"/auth/sign_in", json=credentials)
+
+    if req.status_code >= 500 :
+        raise Exception(req.text)
+
+    r = req.json()
+
+    if(req.status_code >= 400):
+        raise Exception(r["error"])
+
     cred = {"token":  r["token"], "client_id":  r["client_id"], "email": r["data"]["email"]}
+
 
     if "password" in credentials:
         credentials.pop("password")
