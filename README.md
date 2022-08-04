@@ -81,7 +81,7 @@ Options:
 
 ```json
 {
-    "login": "CPF SÓ OS DIGITOS",
+    "login": "CPF SEGUNDO O FORMATO: XXXXXXXXX-XX",
     "latitude": -17.0,
     "longitude": -42.0,
     "address": "Rua Sete de Março, 1009 - Ipiranga, Juazeiro do Norte - SP, 99999-999, Brasil"

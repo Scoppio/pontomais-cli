@@ -7,6 +7,10 @@ from pontomais.calc_time import time_cards as p_time_cards
 from pontomais.clockin import main as p_register
 from pontomais.login import login as p_login
 
+from pathlib import Path
+import os
+from getpass import getpass
+
 
 @click.group()
 def cli():
@@ -15,15 +19,15 @@ def cli():
 
 @cli.command("login")
 @click.option('--login', required=False, help="either CPF or email")
+@click.option('--password', required=False, help="password")
 @click.option('--address', required=False, help="Address of where you are working")
 @click.option('--latitude', type=click.FloatRange(-90, 90), required=False,
               help="Latitude of the place you are currently working from")
 @click.option('--longitude', type=click.FloatRange(-180, 180), required=False,
               help="Longitude of the place you are currently working from")
-@click.option('--json-profile', required=False, type=click.File('r'),
+@click.option('--profile', required=False, type=click.File('r'),
               help="a json file with login, address, latitude and longitude already on")
-@click.password_option(confirmation_prompt=False)
-def get_credentials(login, address, latitude, longitude, json_profile, password):
+def get_credentials(login, address, latitude, longitude, profile, password):
     """
     Generate a credential file necessary to do almost any action with this client
 
@@ -31,15 +35,23 @@ def get_credentials(login, address, latitude, longitude, json_profile, password)
     password will be asked to be input in a safe manner in this app
 
     """
-    if json_profile:
-        profile = json.load(json_profile)
-    else:
-        if not login or not latitude or not longitude or not address:
-            raise RuntimeError("Missing arguments, must provide login, latitude, longitude, address and password")
-        profile = {"login": login, "latitude": latitude, "longitude": longitude, "address": address}
-    profile["password"] = password
+    
+    if login and latitude and longitude and address:
+        if not password:
+            password = getpass()
+        credentials = {"login": login, "latitude": latitude, "longitude": longitude, "address": address, "password":password}
 
-    p_login(profile)
+    elif profile:
+        credentials = json.load(profile)
+    else:
+        default_path = os.path.join(str(Path.home()), ".pontomais/profile.json")
+        with open(default_path, "r") as f:
+            credentials = json.load(f)
+
+    if "password" not in credentials:
+        credentials["password"] = getpass()
+
+    p_login(credentials)
 
 
 @cli.command("ttco")
