@@ -75,6 +75,5 @@ def request(address, credential):
     print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - Status code: {status}')
 
 
-
 if __name__ == "__main__":
     main()

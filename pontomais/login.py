@@ -17,7 +17,12 @@ def login(credentials):
     if(req.status_code >= 400):
         raise Exception(r["error"])
 
-    cred = {"token":  r["token"], "client_id":  r["client_id"], "email": r["data"]["email"]}
+    if "email" in r["data"]:
+        email = r["data"]["email"]
+    else:
+        email = r["data"]["login"]
+
+    cred = {"token":  r["token"], "client_id":  r["client_id"], "email": email}
 
 
     if "password" in credentials:
