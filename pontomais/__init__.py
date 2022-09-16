@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 API_ROOT = 'https://api.pontomais.com.br/api'
 
 pontomais_dir = os.path.join(str(Path.home()), ".pontomais")
